@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
                     try {
                         val movieJsonArray = json.jsonObject.getJSONArray("results")
                         movies.addAll(Movie.fromJsonArray(movieJsonArray))
-                        movieAdapter.notifyDataSetChanged()
                         Log.i(TAG, "Movie List $movies")
                     }catch(e:JSONException)
                     {
