@@ -1,4 +1,5 @@
 package com.example.flixster
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,11 +29,13 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(statusCode: Int, headers: Headers?, response: String?, throwable: Throwable?) {
                     Log.e(TAG, "on Failure $statusCode")
             }
+            @SuppressLint("NotifyDataSetChanged")
             override fun onSuccess(statusCode: Int, headers: Headers?, json: JSON) {
                     Log.i(TAG, "onSuccess JSON data")
                     try {
                         val movieJsonArray = json.jsonObject.getJSONArray("results")
                         movies.addAll(Movie.fromJsonArray(movieJsonArray))
+                        movieAdapter.notifyDataSetChanged()
                         Log.i(TAG, "Movie List $movies")
                     }catch(e:JSONException)
                     {
